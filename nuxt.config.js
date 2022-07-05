@@ -15,14 +15,31 @@ export default {
       { hid: 'description', name: 'description', content: '' },
       { name: 'format-detection', content: 'telephone=no' },
     ],
-    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
+    link: [
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      {
+        rel: 'stylesheet',
+        type: 'text/css',
+        href: 'https://unpkg.com/@egjs/vue-flicking@4.9.0/dist/flicking.min.css',
+      },
+      {
+        rel: 'stylesheet',
+        type: 'text/css',
+        href: 'https://unpkg.com/@egjs/vue-flicking@4.9.0/dist/flicking-inline.min.css',
+      },
+      {
+        rel: 'stylesheet',
+        type: 'text/css',
+        href: 'https://unpkg.com/@egjs/flicking-plugins@4.4.0/dist/pagination.min.css',
+      },
+    ],
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: [],
+  plugins: [{ src: './plugins/flicking', ssr: true }],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,

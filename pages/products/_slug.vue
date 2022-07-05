@@ -1,13 +1,22 @@
 <template>
   <div class="flex space-y-5 md:space-y-0 md:space-x-10 flex-col md:flex-row">
     <div class="md:w-1/3">
-      <img
-        v-for="item in product.current.images"
-        :key="item.image_id"
-        :src="item.image_url"
-        :alt="item.image"
-        class="w-64 h-64 m-auto object-cover transform transition-transform duration-500 focus:scale-150 hover:scale-150"
-      />
+      <Flicking :options="{ circular: true }" :plugins="plugins">
+        <div
+          v-for="item in product.current.images"
+          :key="item.image_id"
+          class="card-panel w-full"
+        >
+          <img
+            :src="item.image_url"
+            :alt="item.image"
+            class="h-auto m-auto object-cover pointer-events-none"
+          />
+        </div>
+        <template #viewport>
+          <div class="flicking-pagination"></div>
+        </template>
+      </Flicking>
     </div>
     <div class="flex-1">
       <h5
@@ -25,6 +34,7 @@
 <script lang="ts">
 import Vue from 'vue'
 import { mapState } from 'vuex'
+import { Pagination } from '@egjs/flicking-plugins'
 
 export default Vue.extend({
   name: 'DetailPage',
@@ -35,6 +45,12 @@ export default Vue.extend({
   },
   computed: {
     ...mapState(['product']),
+  },
+
+  data() {
+    return {
+      plugins: [new Pagination({ type: 'bullet' })],
+    }
   },
 })
 </script>
